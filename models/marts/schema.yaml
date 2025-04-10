@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: ventes_par_mois
+    description: "Resume des totaux ventes par mois"
+    columns:
+      - name: annee
+        tests:
+          - annee_apres_1900
+        description: "Annee de vente"
+      - name: mois
+        description: "Mois de vente"
+      - name: vente_par_mois
+        description: "Ventes par Mois"
+        tests:
+          - not_null

@@ -3,5 +3,5 @@ SELECT
     modele_vehicule,
     id_type_vehicule,
     immatriculation
-FROM `centralisation_donnees_vtc.vehicules`
+FROM `Trajets.Vehicules`
 WHERE immatriculation IS NOT NULL

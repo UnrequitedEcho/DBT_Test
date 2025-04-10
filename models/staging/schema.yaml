@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: stg_produits
+    columns:
+      - name: id_produit
+        tests:
+          - not null
+          - unique
+      - name: nom_produit
+      - name: id_categorie_produit
+        tests:
+          - relationships:
+              to: ref('stg_categories_produit')
+              field: id_categories_produit
+
+  - name: stg_categories_produit
+    columns:
+      - name: id_categorie_produit
+        tests:
+          - not null
+          - unique
+      - name: nom_categorie_produit
+
+  - name: stg_clients
+    columns:
+      - name: id_client
+        tests:
+          - not null
+          - unique
+      - name: nom_client
+      - name: email_client
+      - name: id_segment_client
+        tests:
+          - relationships:
+              to: ref('stg_segments_client')
+              field: id_segment_client
+  
+  - name: stg_segments_client
+    columns:
+      - name: id_segment_client
+        tests:
+          - not null
+          - unique
+      - name: nom_segment_client
+
+  - name: stg_regions
+    columns:
+      - name: id_region
+        tests:
+          - not null
+          - unique
+      - name: nom_region
+
+  - name: stg_dates
+    columns:
+      - name: id_date
+        tests:
+          - not null
+          - unique
+      - name: jour
+      - name: mois
+      - name: annee
+  

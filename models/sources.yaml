@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: TechStore
+    tables:
+      - name: Ventes
+      - name: Clients
+      - name: Produits
+      - name: Regions
+      - name: Dates

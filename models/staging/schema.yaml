@@ -1,81 +1,64 @@
 version: 2
 
-sources:
-  - name: Trajets
-    description: "Les données brutes de l'entreprise VTC Paris."
-    tables:
-      - name: Clients
-        description: "Table des clients, contenant les informations démographiques et de segment."
-      - name: faits_Trajets
-        description: "Table des trajets avec les informations sur les trajets effectués, y compris les montants et distances."
-      - name: Vehicules
-        description: "Table des véhicules avec les informations sur le modèle et le type de véhicule."
-
-version: 2
-
 models:
+  - name: stg_produits
+    columns:
+      - name: id_produit
+        tests:
+          - not null
+          - unique
+      - name: nom_produit
+      - name: id_categorie_produit
+        tests:
+          - relationships:
+              to: ref('stg_categories_produit')
+              field: id_categories_produit
+
+  - name: stg_categories_produit
+    columns:
+      - name: id_categorie_produit
+        tests:
+          - not null
+          - unique
+      - name: nom_categorie_produit
+
   - name: stg_clients
-    description: "Modèle de staging pour nettoyer les données clients."
     columns:
       - name: id_client
-        description: "Identifiant unique du client."
         tests:
-          - not_null
+          - not null
           - unique
+      - name: nom_client
       - name: email_client
-        description: "Adresse e-mail du client, utilisée pour la communication."
+      - name: id_segment_client
         tests:
-          - not_null
+          - relationships:
+              to: ref('stg_segments_client')
+              field: id_segment_client
+  
+  - name: stg_segments_client
+    columns:
+      - name: id_segment_client
+        tests:
+          - not null
+          - unique
+      - name: nom_segment_client
 
+  - name: stg_regions
+    columns:
+      - name: id_region
+        tests:
+          - not null
+          - unique
+      - name: nom_region
 
-version: 2
-
-models:
-  - name: stg_clients
-    description: "Modèle de staging pour nettoyer les données clients."
+  - name: stg_dates
     columns:
-      - name: id_client
-        description: "Identifiant unique du client."
+      - name: id_date
         tests:
-          - not_null
+          - not null
           - unique
-      - name: email_client
-        description: "Adresse e-mail du client."
-        tests:
-        - not_null
-  - name: stg_segments_clients
-    description: "Modèle de staging pour les segments clients."
-    columns:
-      - name: id_segment
-        description: "Identifiant du segment."
-        tests:
-          - not_null
-          - unique
-      - name: nom_segment
-        description: "Nom du segment client (Entreprise, VIP, etc.)."
-        tests:
-          - not_null
-  - name: stg_vehicules
-    description: "Modèle de staging pour nettoyer les données véhicules."
-    columns:
-      - name: id_vehicule
-        description: "Identifiant unique du véhicule."
-        tests:
-          - not_null
-          - unique
-      - name: immatriculation
-        description: "Numéro d'immatriculation du véhicule."
-        tests:
-          - not_null
-  - name: stg_types_vehicules
-    description: "Modèle de staging pour les types de véhicules."
-    columns:
-      - name: id_type_vehicule
-        description: "Identifiant du type de véhicule."
-        tests:
-          - not_null
-          - unique
-      - name: nom_type_vehicule
-        description: "Nom du type de véhicule (SUV, Berline, etc.)."
-        tests:
-          - not_null
+      - name: jour
+      - name: mois
+      - name: annee
+  

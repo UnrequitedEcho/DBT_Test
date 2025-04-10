@@ -4,7 +4,7 @@ SELECT
     t.id_client,
     t.id_vehicule,
     t.montant_total
-FROM `centralisation_donnees_vtc.trajets` t
+FROM `Trajets.faits_Trajets` t
 )
 
 SELECT

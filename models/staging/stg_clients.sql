@@ -4,5 +4,5 @@ SELECT
     prenom_client,
     email_client,
     id_segment
-FROM `Trajets.Clients`
+FROM {{ source('Trajets', 'Clients') }}
 WHERE email_client IS NOT NULL

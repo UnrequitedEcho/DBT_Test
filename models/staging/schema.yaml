@@ -1,5 +1,18 @@
 version: 2
 
+sources:
+  - name: Trajets
+    description: "Les données brutes de l'entreprise VTC Paris."
+    tables:
+      - name: Clients
+        description: "Table des clients, contenant les informations démographiques et de segment."
+      - name: faits_Trajets
+        description: "Table des trajets avec les informations sur les trajets effectués, y compris les montants et distances."
+      - name: Vehicules
+        description: "Table des véhicules avec les informations sur le modèle et le type de véhicule."
+
+version: 2
+
 models:
   - name: stg_clients
     description: "Modèle de staging pour nettoyer les données clients."
